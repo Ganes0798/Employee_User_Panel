@@ -1,0 +1,12 @@
+<div class="sidnav-header">
+    <img style="width: 50%; height: 50%;" src="assets/Images/Logo.png" alt="">
+    <div class="header-text">
+        <h2>EMS</h2>
+    </div>
+</div>
+<mat-nav-list>
+    <a mat-list-item *ngFor="let item of menuItems()" [routerLink]="item.route">
+        <mat-icon matListItemIcon style="color: whitesmoke;">{{item.icon}}</mat-icon>
+        <span matListItemTitle style="color: white;">{{ item.label }}</span>
+    </a>
+</mat-nav-list>

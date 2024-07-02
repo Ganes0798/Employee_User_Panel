@@ -1,0 +1,36 @@
+.sidnav-header
+{
+    padding-top: 24px;
+    text-align: center;
+
+    > img{
+        border-radius: 100%;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+    .header-text
+{
+    >h2{
+        margin: 0;
+        font-size: medium;
+        line-height: 1.5rem;
+        color: white;
+    }
+    > p{
+        margin: 0;
+        font-size: 0.8rem;
+    }
+}
+}
+
+mat-nav-list {
+    >a:active{
+        background-color: whitesmoke;
+    }
+    > a:hover{
+        background-color: rgb(10, 123, 131);
+    }
+}
+
+
+
