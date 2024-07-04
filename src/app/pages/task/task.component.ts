@@ -18,10 +18,10 @@ import Swal from 'sweetalert2';
   selector: 'app-employee',
   standalone: true,
   imports: [MatTableModule, MatPaginatorModule,MatSidenavModule, MatIconModule, MatFormFieldModule,ReactiveFormsModule, MatInputModule, MatButtonModule,MatSelectModule, CommonModule, MatOptionModule, MatAutocompleteModule],
-  templateUrl: './employee.component.html',
-  styleUrl: './employee.component.scss'
+  templateUrl: './task.component.html',
+  styleUrl: './task.component.scss'
 })
-export class EmployeeComponent {
+export class TaskComponent {
 
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'password', 'role', 'action'];
   dataSource = new MatTableDataSource<any>;
@@ -47,72 +47,8 @@ export class EmployeeComponent {
       employeePassword: ['', Validators.required],
       employeeRole: ['', Validators.required]
     });
-
-    this.getEmp();
-
-   this.options = [{value: 1, name: 'Senior Manager'}, {value:2, name:'Junior Manager'}, {value: 3,name: 'Project Leader'}, {value:4, name:'Worker'}]
   }
 
-  //Get Employee
-  getEmp(){
-    this._commonService.getEmployee().subscribe({
-      next: (response:any) => {
-          this.dataSource = response.result;
-      },
-      error: (err:any) => {
-           
-      }
-    })
-  }
-
-  //Add Employee
-
-  addEmployee(data:any){
-    const jsonInput = {
-      "employeeFirstName": data.emloyeeFirstName,
-      "employeeLastName": data. employeeLastName,
-      "employeeEmail": data.employeeEmail,
-      "employeePassword": data.employeePassword,
-      "employeeRole": data.employeeRole
-    }
-
-    this._commonService.postEmployee(jsonInput).subscribe({
-      next: (response:any) => {
-        Swal.fire({
-          title: response.message + "!",
-          text: "Click Ok to Continue!",
-          icon: "success"
-        });
-
-        this._commonService.sendEmail(jsonInput).subscribe({
-            next: (response:any) => {
-              if(response.code == 200 && response.success == true)
-              {
-                Swal.fire({
-                  title: "Mail Sent to Employee!",
-                  text: "Click Ok to Continue!",
-                  icon: "success"
-                });
-              }
-            },
-            error:(err:any) => {
-              Swal.fire({
-                title:  "Mail Sent Successfully!",
-                text: "Click Ok to Proceed",
-                icon: "success"
-              });
-            }
-        });
-      },
-      error: (err: any) => {
-         Swal.fire({
-           title: err.message + "!",
-           text: "Click Ok to Proceed",
-           icon: "warning"
-         });
-      }
-    })
-  }
 
 
   submit(form_type: any){
@@ -142,10 +78,7 @@ export class EmployeeComponent {
 formSubmit(){
   if(this.userForm.valid)
   {
-    if(this.button_text == 'Add')
-    {
-      this.addEmployee(this.userForm.value)
-    }
+ 
   }
 }
 

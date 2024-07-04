@@ -38,8 +38,13 @@ export class SidenavComponent {
     {
       icon: 'store',
       label: 'Tasks List',
-      route: '/employee'
+      route: '/task'
     },
+    {
+      icon: 'error',
+      label: 'Issues',
+      route: '/issue',
+    }
     // {
     //   icon: 'store',
     //   label: 'Products',

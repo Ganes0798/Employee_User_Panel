@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
   hide: any;
   loginForm: any;
   localToken: any;
+  username: any;
+  email: any;
+  userId: any;
 
   constructor(private _formBuilder: UntypedFormBuilder, 
               private _loginService: LoginService, 
@@ -59,8 +62,14 @@ export class LoginComponent implements OnInit {
             text: "Click Ok to Continue!",
             icon: "success"
           });
-            this.localToken = response.result.token
+            this.localToken = response.result.token;
+            this.username = response.result.userName;
+            this.email = response.result.email;
+            this.userId = response.result.id;
+            localStorage.setItem('id', this.userId);
             localStorage.setItem('token', this.localToken);
+            localStorage.setItem('un', this.username);
+            localStorage.setItem('email', this.email);
             this.router.navigate(['/dashboard']);
          }
          else{

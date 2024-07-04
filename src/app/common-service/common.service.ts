@@ -25,5 +25,11 @@ export class CommonService {
     return this.http.get(`${this.baseUrl}Employee`);
   }
 
+  //Issues Api
+
+  postIssues(data: any):Observable<any>{
+     return this.http.post(`${this.baseUrl}Issues`, data);
+  }
+
 
 }

@@ -18,11 +18,15 @@ export class LoginService {
     return this.http.post(`${this.apiUrl}Employee/employeelogin`, user);
   }
 
-
-  LogoutAdmin(){
-    localStorage.removeItem('token');
-    this.route.navigate(['/login']);
+  get isUserLoggedIn(){
+    const data = localStorage.getItem('token');
+    return data ? true : false;
   }
+
+LogoutAdmin(){
+    localStorage.clear();
+  this.route.navigate(['/login']);
+}
 
 
 }
