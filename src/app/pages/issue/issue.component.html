@@ -24,29 +24,25 @@
                       <!-- firstname Column -->
                       <ng-container matColumnDef="firstName">
                         <th mat-header-cell *matHeaderCellDef> Issue Type </th>
-                        <td mat-cell *matCellDef="let data"> {{data.employeeFirstName}} </td>
+                        <td mat-cell *matCellDef="let data"> {{data.issueType.issueName}} </td>
                       </ng-container>
                   
                       <!-- lastname Column -->
                       <ng-container matColumnDef="lastName">
                         <th mat-header-cell *matHeaderCellDef> Issue </th>
-                        <td mat-cell *matCellDef="let data"> {{data.employeeLastName}} </td>
+                        <td mat-cell *matCellDef="let data"> {{data.issueSub.issueSubName}} </td>
                       </ng-container>
                   
                       <!-- email Column -->
                       <ng-container matColumnDef="email">
                         <th mat-header-cell *matHeaderCellDef> Issue Date </th>
-                        <td mat-cell *matCellDef="let data"> {{data.employeeEmail}} </td>
+                        <td mat-cell *matCellDef="let data"> {{data.issueDate}} </td>
                       </ng-container>
                   
                       <!-- role Column -->
                       <ng-container matColumnDef="password">
                         <th mat-header-cell *matHeaderCellDef> Progress </th>
-                        <td mat-cell *matCellDef="let data"> {{data.employeePassword}} </td>
-                      </ng-container>
-                      <ng-container matColumnDef="role">
-                        <th mat-header-cell *matHeaderCellDef> Role </th>
-                        <td mat-cell *matCellDef="let data"> {{data.employeeRole}} </td>
+                        <td mat-cell *matCellDef="let data" class="badge badge-primary"> {{data.progress}} </td>
                       </ng-container>
                 
                       <!-- action buttons -->
@@ -95,9 +91,10 @@
                  aria-label="Number"
                  matInput
                  [formControlName]="'issueType'"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option  [value]=""></mat-option>
+                 [matAutocomplete]="auto1"
+                 >
+          <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" (optionSelected)="onIssueTypeSelected($event.option.value)" [displayWith]="getTitle.bind(this)">
+              <mat-option *ngFor="let option of issuetype"  [value]="option.id">{{option.issueName}}</mat-option>
           </mat-autocomplete>
         </mat-form-field>
         <mat-form-field class="example-full-width">
@@ -107,9 +104,9 @@
                    aria-label="Number"
                    matInput
                    [formControlName]="'issue'"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option  [value]=""></mat-option>
+                   [matAutocomplete]="auto2">
+            <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="getSub.bind(this)">
+                <mat-option *ngFor="let sub of filteredIssueSub" [value]="sub.subId">{{sub.issueSubName}}</mat-option>
             </mat-autocomplete>
           </mat-form-field>
 
@@ -131,9 +128,9 @@
                    aria-label="Number"
                    matInput
                    [formControlName]="'urgencyLevel'"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option  [value]=""></mat-option>
+                   [matAutocomplete]="auto3">
+            <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+                <mat-option *ngFor="let opt of urgencyLevel"  [value]="opt.id">{{opt.urgencyName}}</mat-option>
             </mat-autocomplete>
           </mat-form-field>
       <div class="buttons d-flex justify-content-end gap-2">
